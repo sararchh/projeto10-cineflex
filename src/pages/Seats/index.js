@@ -8,13 +8,16 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import CardSeat from '../../components/CardSeat';
 
-import { Container, Content } from './styles';
+import { Container, Content, FormData, ContentForm } from './styles';
+import CardSubtitle from '../../components/CardSubtitle';
 
 function Seats() {
   const params = useParams();
 
   const [seatsMovie, setSeatsMovie] = useState([]);
   const [seatsSelected, setSeatsSelected] = useState([]);
+  const [nameUser, setNameUser] = useState();
+  const [cpfUser, setCpfUser] = useState();
 
   useEffect(() => {
     fetchSeats(params.id);
@@ -30,17 +33,23 @@ function Seats() {
     }
   }
 
-  const handleRemoveSeatSelected = (id) => {
-    const newArray = [...seatsSelected];
-
-    const filterCard = newArray.filter(i => i !== id);
-    setSeatsSelected(filterCard);
-  }
-
   const handleInsertSeatSelected = (id) => {
     const newArray = [...seatsSelected];
     newArray.push(id);
     setSeatsSelected(newArray);
+  }
+
+  const handleRemoveSeatSelected = (id) => {
+    const newArray = [...seatsSelected];
+    const filterCard = newArray.filter(i => i !== id);
+    setSeatsSelected(filterCard);
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    
+    console.log('nameUser', nameUser)
+    console.log('cpfUser', cpfUser)
   }
 
   return (
@@ -63,6 +72,31 @@ function Seats() {
             />
           ))}
         </Content>
+
+        <CardSubtitle />
+
+        <FormData onSubmit={handleSubmit}>
+          <ContentForm>
+            <p>Nome do comprador:</p>
+            <input
+              type='text'
+              value={nameUser}
+              onChange={(e) => { setNameUser(e.target.value) }}
+              placeholder='Digite seu nome...'
+            />
+          </ContentForm>
+
+          <ContentForm>
+            <p>CPF do comprador:</p>
+            <input
+              value={cpfUser}
+              onChange={(e) => { setCpfUser(e.target.value) }}
+              placeholder='Digite seu CPF...'
+            />
+          </ContentForm>
+
+          <button type='submit'>Reservar assento(s)</button>
+        </FormData>
 
       </Container>
 

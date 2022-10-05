@@ -15,11 +15,5 @@ export const Card = styled.button`
   border: 1px solid ${({isAvailable, selected}) => isAvailable  ? '#808F9D'  : '#F7C52B'};
   
   border-radius: 12px;
-
-  .cardSelected {
-  background: #8DD7CF;
-  border: 1px solid #45BDB0;
-  border-radius: 12px;
-}
 `;
 
