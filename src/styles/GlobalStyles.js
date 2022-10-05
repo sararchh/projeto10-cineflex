@@ -4,8 +4,12 @@ export const GlobalStyle = createGlobalStyle`
 
 :root{
   --orange: #E8833A;
+  --yellow:  #FBE192;
   --gray: #C3CFD9;
   --white: #FFFFFF;
+  --background:  #DFE6ED;
+  --text: #293845;
+  --green: #0E7D71;
 }
 
 *{
@@ -39,6 +43,11 @@ body, input, textarea, button {
 h1, h2, h3, h4, h5, h6, strong {
   font-weight: 400;
  font-family: 'Roboto', sans-serif;
+ color: var(--text);
+}
+
+p {
+  color: var(--text);
 }
 
 button{
@@ -51,7 +60,6 @@ button{
 a{
   text-decoration: none;
   text-align: center;
-  color: var(--text-title) !important;
 }
 
 `

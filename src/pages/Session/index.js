@@ -7,6 +7,8 @@ import { toast } from 'react-toastify';
 import Header from '../../components/Header';
 
 import { Container, Content, CardTitle } from './styles';
+import ButtonSession from '../../components/ButtonSession';
+import Footer from '../../components/Footer';
 
 function Session() {
   const params = useParams();
@@ -42,13 +44,17 @@ function Session() {
                 <p>{i.weekday}</p> <span>-</span> <p>{i.date}</p>
               </CardTitle>
 
-              {i.showtimes.map((item) => (
-                <button>{item.name}</button>
-             ))}
+              <span >
+                {i.showtimes.map((item, index) => (
+                  <ButtonSession key={index} text={item.name} idSession={item.id} />
+                ))}
+              </span>
             </>
           ))}
+
         </Content>
       </Container>
+      <Footer posterURL={sessionMovie.posterURL} title={sessionMovie.title}/>
     </>
   )
 }

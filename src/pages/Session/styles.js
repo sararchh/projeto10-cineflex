@@ -3,6 +3,11 @@ import styled from "styled-components";
 export const Container = styled.div`
     max-width: 375px;
     width: 375px;
+    max-height:669px;
+    height: 669px;
+
+    overflow: scroll;
+    overflow-y: auto;
 
     display: flex;
     align-items: center;
@@ -17,12 +22,17 @@ export const Container = styled.div`
     text-align: center;
     letter-spacing: 0.04em;
     margin: 40px;
+    margin-top: 220px;
     }
 `;
 
 export const Content = styled.div`
    max-width: 375px;
    width: 375px;
+
+   span {
+    display: flex;
+   }
 `;
 
 export const CardTitle = styled.div`

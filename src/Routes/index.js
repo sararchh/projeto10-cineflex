@@ -1,20 +1,21 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Home from '../pages/Home';
+import Seats from '../pages/Seats';
 import Session from '../pages/Session';
 
 function RoutesApp() {
   return (
-    <Router>
+    <BrowserRouter>
       <Routes>
 
-        <Route path='/' element={<Home/>}/>
-        <Route path='/movie/:id' element={<Session/>}/>
-        {/* <Route path='/session' element={<Session/>}/> */}
+        <Route path='/' element={<Home />} />
+        <Route path='/movie/:id' element={<Session />} />
+        <Route path='/session/:id' element={<Seats />} />
 
       </Routes>
-    </Router>
+    </BrowserRouter>
   )
 }
 
