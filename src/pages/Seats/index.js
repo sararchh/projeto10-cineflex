@@ -10,6 +10,8 @@ import CardSeat from '../../components/CardSeat';
 
 import { Container, Content, FormData, ContentForm } from './styles';
 import CardSubtitle from '../../components/CardSubtitle';
+import { formatCPF } from '../../utils/formatCPF';
+import { normalizeString } from '../../utils/normalizeString';
 
 function Seats() {
   const params = useParams();
@@ -33,6 +35,21 @@ function Seats() {
     }
   }
 
+  const postSeats = async () => {
+    try {
+      const userFormatted = {
+        ids: seatsSelected,
+        name: nameUser,
+        cpf: normalizeString(cpfUser),
+      }
+
+      await api.post('seats/book-many', userFormatted);
+
+    } catch (error) {
+      toast.error('Erro ao reservar assento');
+    }
+  }
+
   const handleInsertSeatSelected = (id) => {
     const newArray = [...seatsSelected];
     newArray.push(id);
@@ -47,9 +64,12 @@ function Seats() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    
-    console.log('nameUser', nameUser)
-    console.log('cpfUser', cpfUser)
+
+    console.log('nameUser', nameUser);
+    console.log('cpfUser', cpfUser);
+    console.log('seatsSelected', seatsSelected);
+
+    postSeats();
   }
 
   return (
@@ -83,15 +103,17 @@ function Seats() {
               value={nameUser}
               onChange={(e) => { setNameUser(e.target.value) }}
               placeholder='Digite seu nome...'
+              required={true}
             />
           </ContentForm>
 
           <ContentForm>
             <p>CPF do comprador:</p>
             <input
-              value={cpfUser}
+              value={formatCPF(cpfUser)}
               onChange={(e) => { setCpfUser(e.target.value) }}
               placeholder='Digite seu CPF...'
+              required={true}
             />
           </ContentForm>
 
