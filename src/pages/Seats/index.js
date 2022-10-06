@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { api } from '../../services/api';
 import { toast } from 'react-toastify';
@@ -15,6 +15,7 @@ import { normalizeString } from '../../utils/normalizeString';
 
 function Seats() {
   const params = useParams();
+  const navigate = useNavigate();
 
   const [seatsMovie, setSeatsMovie] = useState([]);
   const [seatsSelected, setSeatsSelected] = useState([]);
@@ -35,8 +36,15 @@ function Seats() {
     }
   }
 
+  console.log(seatsSelected.length)
+
   const postSeats = async () => {
     try {
+      if(seatsSelected.length === 0) {
+        toast.error('Selecione pelo menos 1 assento');
+        return;
+      }
+
       const userFormatted = {
         ids: seatsSelected,
         name: nameUser,
@@ -45,8 +53,11 @@ function Seats() {
 
       await api.post('seats/book-many', userFormatted);
 
+      navigate('/success');
+
     } catch (error) {
       toast.error('Erro ao reservar assento');
+      return;
     }
   }
 
@@ -64,10 +75,6 @@ function Seats() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    console.log('nameUser', nameUser);
-    console.log('cpfUser', cpfUser);
-    console.log('seatsSelected', seatsSelected);
 
     postSeats();
   }
@@ -118,6 +125,7 @@ function Seats() {
           </ContentForm>
 
           <button type='submit'>Reservar assento(s)</button>
+
         </FormData>
 
       </Container>
