@@ -43,7 +43,7 @@ function Success() {
         <Link to='/'>
           <button>Voltar pra Home</button>
         </Link>
-      </Container>
+      </Container> 
     </>
   )
 }

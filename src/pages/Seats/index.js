@@ -71,7 +71,7 @@ function Seats() {
   }
 
   const handleInsertSeatSelected = (id, Seat) => {
- 
+
     const newArray = [...seatsSelectedID];
     newArray.push(id);
     setSeatsSelectedID(newArray);
@@ -85,7 +85,7 @@ function Seats() {
     const newArray = [...seatsSelectedID];
     const filterCard = newArray.filter(i => i !== id);
     setSeatsSelectedID(filterCard);
-    
+
     const newArraySeat = [...seatsSelected];
     const filterCardSeat = newArraySeat.filter(i => i !== Seat);
     setSeatsSelected(filterCardSeat);
@@ -125,6 +125,7 @@ function Seats() {
             <p>Nome do comprador:</p>
             <input
               type='text'
+              name='name'
               value={nameUser}
               onChange={(e) => { setNameUser(e.target.value) }}
               placeholder='Digite seu nome...'
@@ -135,6 +136,7 @@ function Seats() {
           <ContentForm>
             <p>CPF do comprador:</p>
             <input
+              name='CPF'
               value={formatCPF(cpfUser)}
               onChange={(e) => { setCpfUser(e.target.value) }}
               placeholder='Digite seu CPF...'
