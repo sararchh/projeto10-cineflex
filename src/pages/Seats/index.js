@@ -37,9 +37,6 @@ function Seats() {
     }
   }
 
-  console.log('seatsSelected', seatsSelected)
-  console.log('seatsSelected', seatsMovie.name)
-
   const postSeats = async () => {
     try {
       if (seatsSelectedID.length === 0) {
@@ -74,7 +71,7 @@ function Seats() {
   }
 
   const handleInsertSeatSelected = (id, Seat) => {
-    console.log('Seat', Seat);
+ 
     const newArray = [...seatsSelectedID];
     newArray.push(id);
     setSeatsSelectedID(newArray);
