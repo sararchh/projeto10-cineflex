@@ -4,7 +4,7 @@ import { Card } from './styles';
 
 import { toast } from 'react-toastify';
 
-function CardSeat({ Seat, idSeat, isAvailable, seatsSelected, handleInsertSeatSelected, handleRemoveSeatSelected }) {
+function CardSeat({ Seat, idSeat, isAvailable, seatsSelectedID, handleInsertSeatSelected, handleRemoveSeatSelected }) {
 
 
   const handleSeatAvailable = () => {
@@ -13,12 +13,12 @@ function CardSeat({ Seat, idSeat, isAvailable, seatsSelected, handleInsertSeatSe
       return;
     }
 
-    const hasAdded = seatsSelected.includes(idSeat);
+    const hasAdded = seatsSelectedID.includes(idSeat);
 
     if(!hasAdded) {
-      handleInsertSeatSelected(idSeat);
+      handleInsertSeatSelected(idSeat, Seat);
     } else {
-      handleRemoveSeatSelected(idSeat);
+      handleRemoveSeatSelected(idSeat, Seat);
     }
 
   }
@@ -26,7 +26,7 @@ function CardSeat({ Seat, idSeat, isAvailable, seatsSelected, handleInsertSeatSe
   return (
     <Card
       isAvailable={isAvailable}
-      selected={seatsSelected.includes(idSeat)}
+      selected={seatsSelectedID.includes(idSeat)}
       onClick={() => handleSeatAvailable()}
     >
       {Seat}

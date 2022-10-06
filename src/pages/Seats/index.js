@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, createSearchParams } from 'react-router-dom';
 
 import { api } from '../../services/api';
 import { toast } from 'react-toastify';
@@ -19,6 +19,7 @@ function Seats() {
 
   const [seatsMovie, setSeatsMovie] = useState([]);
   const [seatsSelected, setSeatsSelected] = useState([]);
+  const [seatsSelectedID, setSeatsSelectedID] = useState([]);
   const [nameUser, setNameUser] = useState();
   const [cpfUser, setCpfUser] = useState();
 
@@ -36,24 +37,35 @@ function Seats() {
     }
   }
 
-  console.log(seatsSelected.length)
+  console.log('seatsSelected', seatsSelected)
+  console.log('seatsSelected', seatsMovie.name)
 
   const postSeats = async () => {
     try {
-      if(seatsSelected.length === 0) {
+      if (seatsSelectedID.length === 0) {
         toast.error('Selecione pelo menos 1 assento');
         return;
       }
 
       const userFormatted = {
-        ids: seatsSelected,
+        ids: seatsSelectedID,
         name: nameUser,
         cpf: normalizeString(cpfUser),
       }
 
       await api.post('seats/book-many', userFormatted);
 
-      navigate('/success');
+      navigate({
+        pathname: '/success',
+        search: createSearchParams({
+          nameUser: nameUser,
+          cpfUser: cpfUser,
+          seatsSelected: [seatsSelected],
+          title: seatsMovie.movie.title,
+          date: seatsMovie.day.date,
+          hours: seatsMovie.name,
+        }).toString()
+      });
 
     } catch (error) {
       toast.error('Erro ao reservar assento');
@@ -61,16 +73,25 @@ function Seats() {
     }
   }
 
-  const handleInsertSeatSelected = (id) => {
-    const newArray = [...seatsSelected];
+  const handleInsertSeatSelected = (id, Seat) => {
+    console.log('Seat', Seat);
+    const newArray = [...seatsSelectedID];
     newArray.push(id);
-    setSeatsSelected(newArray);
+    setSeatsSelectedID(newArray);
+
+    const newArraySeat = [...seatsSelected];
+    newArraySeat.push(Seat);
+    setSeatsSelected(newArraySeat);
   }
 
-  const handleRemoveSeatSelected = (id) => {
-    const newArray = [...seatsSelected];
+  const handleRemoveSeatSelected = (id, Seat) => {
+    const newArray = [...seatsSelectedID];
     const filterCard = newArray.filter(i => i !== id);
-    setSeatsSelected(filterCard);
+    setSeatsSelectedID(filterCard);
+    
+    const newArraySeat = [...seatsSelected];
+    const filterCardSeat = newArraySeat.filter(i => i !== Seat);
+    setSeatsSelected(filterCardSeat);
   }
 
   const handleSubmit = (event) => {
@@ -93,7 +114,7 @@ function Seats() {
               idSeat={i.id}
               Seat={i.name}
               isAvailable={i.isAvailable}
-              seatsSelected={seatsSelected}
+              seatsSelectedID={seatsSelectedID}
               handleInsertSeatSelected={handleInsertSeatSelected}
               handleRemoveSeatSelected={handleRemoveSeatSelected}
             />
