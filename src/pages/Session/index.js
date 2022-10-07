@@ -40,13 +40,13 @@ function Session() {
         <Content>
           {Boolean(sessionMovie.days) && sessionMovie.days.map((i) => (
             <>
-              <CardTitle key={i.id}>
+              <CardTitle key={i.id} data-identifier="session-date">
                 <p>{i.weekday}</p> <span>-</span> <p>{i.date}</p>
               </CardTitle>
 
               <span >
                 {i.showtimes.map((item, index) => (
-                  <ButtonSession key={index} text={item.name} idSession={item.id} />
+                  <ButtonSession key={index} text={item.name} idSession={item.id} data-identifier="hour-minute-btn"/>
                 ))}
               </span>
             </>

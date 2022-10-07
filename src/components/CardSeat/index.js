@@ -15,7 +15,7 @@ function CardSeat({ Seat, idSeat, isAvailable, seatsSelectedID, handleInsertSeat
 
     const hasAdded = seatsSelectedID.includes(idSeat);
 
-    if(!hasAdded) {
+    if (!hasAdded) {
       handleInsertSeatSelected(idSeat, Seat);
     } else {
       handleRemoveSeatSelected(idSeat, Seat);
@@ -25,6 +25,7 @@ function CardSeat({ Seat, idSeat, isAvailable, seatsSelectedID, handleInsertSeat
 
   return (
     <Card
+      data-identifier="seat"
       isAvailable={isAvailable}
       selected={seatsSelectedID.includes(idSeat)}
       onClick={() => handleSeatAvailable()}

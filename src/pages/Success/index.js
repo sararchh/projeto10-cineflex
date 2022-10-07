@@ -22,26 +22,26 @@ function Success() {
 
         <Content>
           <h3>Filme e sessão</h3>
-          <p>{searchParams.get('title')}</p>
-          <p>{searchParams.get('date')}  {searchParams.get('hours')}</p>
+          <p data-identifier="movie-session-infos-reserve-finished">{searchParams.get('title')}</p>
+          <p data-identifier="movie-session-infos-reserve-finished">{searchParams.get('date')}  {searchParams.get('hours')}</p>
         </Content>
 
         <Content>
           <h3>Ingressos</h3>
 
           {arraySeat.map((i) => (
-            <p>Assento: {i}</p>
+            <p data-identifier="seat-infos-reserve-finished">Assento: {i}</p>
           ))}
         </Content>
 
         <Content>
           <h3>Comprador</h3>
-          <p>Nome: {searchParams.get('nameUser')}</p>
-          <p>CPF: {searchParams.get('cpfUser')}</p>
+          <p data-identifier="buyer-infos-reserve-finished">Nome: {searchParams.get('nameUser')}</p>
+          <p data-identifier="buyer-infos-reserve-finished">CPF: {searchParams.get('cpfUser')}</p>
         </Content>
 
         <Link to='/'>
-          <button>Voltar pra Home</button>
+          <button data-identifier="back-to-home-btn">Voltar pra Home</button>
         </Link>
       </Container> 
     </>

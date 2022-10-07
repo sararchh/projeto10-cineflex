@@ -130,6 +130,7 @@ function Seats() {
               onChange={(e) => { setNameUser(e.target.value) }}
               placeholder='Digite seu nome...'
               required={true}
+              data-identifier="buyer-name-input"
             />
           </ContentForm>
 
@@ -141,10 +142,11 @@ function Seats() {
               onChange={(e) => { setCpfUser(e.target.value) }}
               placeholder='Digite seu CPF...'
               required={true}
+              data-identifier="buyer-cpf-input"
             />
           </ContentForm>
 
-          <button type='submit'>Reservar assento(s)</button>
+          <button type='submit' data-identifier="reservation-btn">Reservar assento(s)</button>
 
         </FormData>
 
